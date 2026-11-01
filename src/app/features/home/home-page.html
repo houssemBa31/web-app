@@ -1,0 +1,213 @@
+<a class="skip-link" href="#products">Skip to products</a>
+
+<header class="site-header">
+  <a class="brand" href="#home" aria-label="Peak Store home">
+    <span class="brand-mark">P</span>
+    <span>PEAK<span class="brand-light">STORE</span></span>
+  </a>
+
+  <nav class="main-nav" aria-label="Main navigation">
+    <a href="#home">Home</a>
+    <a href="#products" (click)="resetFilters()">Shop</a>
+    <button type="button" class="nav-link" [class.active]="onlyNew()" (click)="showNewArrivals()">
+      New arrivals
+    </button>
+  </nav>
+
+  <div class="header-actions">
+    <label class="header-search">
+      <span class="visually-hidden">Search products</span>
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2" />
+        <path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+      <input
+        type="search"
+        placeholder="Search products"
+        [value]="searchQuery()"
+        (input)="searchQuery.set($any($event.target).value)"
+      />
+    </label>
+
+    <button class="cart-button" type="button" (click)="cartOpen.set(true)"
+            [attr.aria-label]="'Open cart, ' + cartCount() + ' items'">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <path d="M5 8h14l-1 12H6L5 8Zm4 0V7a3 3 0 0 1 6 0v1" fill="none"
+              stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+      </svg>
+      @if (cartCount() > 0) {
+        <span class="cart-count">{{ cartCount() }}</span>
+      }
+    </button>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Everyday essentials, chosen with care.</h1>
+      <p class="hero-description">
+        A small, carefully edited range. Fewer products, better ones, delivered to your door.
+      </p>
+      <a class="primary-button" href="#products">Shop the collection</a>
+    </div>
+
+    <div class="hero-image-frame">
+      <img
+        src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1000&auto=format&fit=crop&q=85"
+        alt="Clothes on racks in a modern store"
+        width="1000" height="730"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+
+  <!-- Adapte ces 3 promesses à ta vraie offre -->
+  <section class="benefits" aria-label="Store benefits">
+    <div><strong>Cash on delivery</strong><p>Pay when your order arrives</p></div>
+    <div><strong>Delivery to your wilaya</strong><p>Tracked from shop to door</p></div>
+    <div><strong>Easy returns</strong><p>Change your mind within 7 days</p></div>
+  </section>
+
+  <section id="products" class="products-section">
+    <div class="section-heading">
+      <h2>Shop</h2>
+      <p class="product-count" role="status" aria-live="polite">
+        {{ filteredProducts().length }} products
+      </p>
+    </div>
+
+    <div class="toolbar">
+      <div class="category-list" role="group" aria-label="Filter by category">
+        @for (category of categories; track category) {
+          <button
+            type="button"
+            class="category-button"
+            [class.active]="selectedCategory() === category"
+            [attr.aria-pressed]="selectedCategory() === category"
+            (click)="setCategory(category)"
+          >
+            {{ category }}
+          </button>
+        }
+      </div>
+
+      <label class="sort">
+        <span>Sort by</span>
+        <select (change)="sortBy.set($any($event.target).value)">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+          <option value="rating">Best rated</option>
+        </select>
+      </label>
+    </div>
+
+    @if (hasActiveFilters()) {
+      <button type="button" class="clear-filters" (click)="resetFilters()">
+        Clear all filters
+      </button>
+    }
+
+    <div class="product-grid">
+      @for (product of filteredProducts(); track product.id) {
+        <article class="product-card">
+          <div class="product-image">
+            <img [src]="product.image" [alt]="product.name" width="400" height="460" loading="lazy" />
+            @if (product.isNew) {
+              <span class="product-badge">New</span>
+            }
+          </div>
+
+          <div class="product-info">
+            <div class="product-meta">
+              <span class="product-category">{{ product.category }}</span>
+              <span class="rating" [attr.aria-label]="'Rated ' + product.rating + ' out of 5'">
+                <span aria-hidden="true">★</span> {{ product.rating }}
+              </span>
+            </div>
+
+            <h3>{{ product.name }}</h3>
+            <p class="product-description">{{ product.description }}</p>
+
+            <div class="product-bottom">
+              <strong>{{ fmt(product.price) }}</strong>
+              <button type="button" class="add-button"
+                      [attr.aria-label]="'Add ' + product.name + ' to cart'"
+                      (click)="addToCart(product)">
+                Add to cart
+              </button>
+            </div>
+          </div>
+        </article>
+      } @empty {
+        <div class="empty-state">
+          <h3>No products match your search</h3>
+          <p>Check the spelling, or remove a filter to see more.</p>
+          <button type="button" class="reset-button" (click)="resetFilters()">Clear filters</button>
+        </div>
+      }
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <a class="brand footer-brand" href="#home">
+    <span class="brand-mark">P</span>
+    <span>PEAK<span class="brand-light">STORE</span></span>
+  </a>
+  <p>Thoughtfully selected. Made for everyday life.</p>
+  <span>© 2026 Peak Store</span>
+</footer>
+
+<!-- Panier -->
+<div class="overlay" [class.open]="cartOpen()" (click)="closeCart()"></div>
+
+<aside class="drawer" [class.open]="cartOpen()" role="dialog" aria-modal="true"
+       aria-label="Shopping cart" [attr.aria-hidden]="!cartOpen()">
+  <div class="drawer-head">
+    <h2>Your cart ({{ cartCount() }})</h2>
+    <button type="button" class="icon-button" aria-label="Close cart" (click)="closeCart()">✕</button>
+  </div>
+
+  @if (cart().length) {
+    <ul class="cart-lines">
+      @for (line of cart(); track line.product.id) {
+        <li class="cart-line">
+          <img [src]="line.product.image" alt="" width="64" height="74" />
+          <div class="cart-line-info">
+            <strong>{{ line.product.name }}</strong>
+            <span>{{ fmt(line.product.price) }}</span>
+            <div class="qty">
+              <button type="button" [attr.aria-label]="'Decrease quantity of ' + line.product.name"
+                      (click)="changeQty(line.product.id, -1)">−</button>
+              <span>{{ line.qty }}</span>
+              <button type="button" [attr.aria-label]="'Increase quantity of ' + line.product.name"
+                      (click)="changeQty(line.product.id, 1)">+</button>
+            </div>
+          </div>
+          <button type="button" class="link-button" (click)="removeLine(line.product.id)">Remove</button>
+        </li>
+      }
+    </ul>
+
+    <div class="drawer-foot">
+      <div class="subtotal"><span>Subtotal</span><strong>{{ fmt(cartTotal()) }}</strong></div>
+      <p>Delivery fees are calculated at checkout.</p>
+      <button type="button" class="primary-button full">Checkout</button>
+    </div>
+  } @else {
+    <div class="drawer-empty">
+      <h3>Your cart is empty</h3>
+      <p>Add a product and it will wait for you here.</p>
+      <button type="button" class="primary-button" (click)="closeCart()">Keep shopping</button>
+    </div>
+  }
+</aside>
+
+@if (toast()) {
+  <div class="toast" role="status" aria-live="polite">
+    {{ toast() }}
+    <button type="button" (click)="cartOpen.set(true)">View cart</button>
+  </div>
+}

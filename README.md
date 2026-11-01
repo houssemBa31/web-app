@@ -26,6 +26,16 @@ For a complete list of available schematics (such as `components`, `directives`,
 ng generate --help
 ```
 
+## Application structure
+
+Application code lives under `src/app` and is organized by responsibility:
+
+- `core/` contains app-wide authentication, guards, interceptors, services, and configuration.
+- `shared/` contains reusable components, directives, pipes, and utilities.
+- `features/` contains domain areas; the storefront is in `home/`, with product types and data in `products/`.
+- `layout/` contains the main and admin layout shells.
+- `app.config.ts` and `app.routes.ts` configure application providers and routes.
+
 ## Building
 
 To build the project run:
