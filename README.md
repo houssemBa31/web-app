@@ -35,6 +35,7 @@ Application code lives under `src/app` and is organized by responsibility:
 - `features/` contains domain areas. Product-specific models, data access, and UI belong inside `features/products/`; `home/` contains the storefront landing page.
 - `layout/` contains the main and admin layout shells.
 - `app.config.ts` and `app.routes.ts` configure application providers and routes.
+- Tailwind CSS v4 is configured through PostCSS; storefront styles use Tailwind utilities in `src/styles.css`.
 
 ## Building
 

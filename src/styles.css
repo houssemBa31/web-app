@@ -1,1 +1,531 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1d211c;
+  --color-muted: #5b6157;
+  --color-line: #e4e6df;
+  --color-brand: #263c30;
+  --color-brand-hover: #3b5947;
+  --color-sage: #f4f6ef;
+  --color-gold: #b8892f;
+}
+
+@layer components {
+  app-home-page {
+    @apply block min-h-screen bg-white text-ink;
+    font-size: 16px;
+  }
+
+  app-home-page *,
+  app-home-page *::before,
+  app-home-page *::after {
+    box-sizing: border-box;
+  }
+
+  app-home-page a {
+    @apply text-inherit no-underline;
+  }
+
+  app-home-page button,
+  app-home-page input,
+  app-home-page select {
+    @apply font-[inherit] text-inherit;
+  }
+
+  app-home-page button {
+    @apply cursor-pointer;
+  }
+
+  app-home-page :focus-visible {
+    @apply outline-2 outline-brand outline-offset-[3px];
+  }
+
+  app-home-page .skip-link {
+    @apply absolute -top-[60px] left-3 z-[100] rounded-md bg-brand px-[14px] py-[10px] text-white;
+  }
+
+  app-home-page .skip-link:focus {
+    @apply top-3;
+  }
+
+  app-home-page .site-header {
+    @apply sticky top-0 z-30 flex items-center justify-between gap-6 border-b border-line bg-white/95 px-[7%] py-[14px] backdrop-blur-[10px];
+  }
+
+  app-home-page .brand {
+    @apply inline-flex items-center gap-[10px] whitespace-nowrap text-[19px] font-extrabold tracking-[-0.6px];
+  }
+
+  app-home-page .brand-mark {
+    @apply grid size-[34px] place-items-center rounded-[10px] bg-brand text-[20px] text-white;
+  }
+
+  app-home-page .brand-light {
+    @apply font-normal text-muted;
+  }
+
+  app-home-page .main-nav {
+    @apply flex gap-7;
+  }
+
+  app-home-page .main-nav a,
+  app-home-page .nav-link {
+    @apply border-0 border-b-2 border-transparent bg-transparent py-2 text-sm text-muted transition-colors duration-150;
+  }
+
+  app-home-page .main-nav a:hover,
+  app-home-page .nav-link:hover,
+  app-home-page .nav-link.active {
+    @apply border-brand text-brand;
+  }
+
+  app-home-page .header-actions {
+    @apply flex items-center gap-3;
+  }
+
+  app-home-page .header-search {
+    @apply flex h-11 w-[240px] items-center gap-2 rounded-lg border border-line px-[14px] text-muted transition-[border-color,box-shadow] duration-150;
+  }
+
+  app-home-page .header-search:focus-within {
+    @apply border-brand ring-[3px] ring-brand/10;
+  }
+
+  app-home-page .header-search input {
+    @apply min-w-0 flex-1 border-0 bg-transparent text-sm outline-none;
+  }
+
+  app-home-page .cart-button {
+    @apply relative grid size-11 place-items-center rounded-lg border border-line bg-white hover:border-brand;
+  }
+
+  app-home-page .cart-count {
+    @apply absolute -top-[7px] -right-[7px] grid h-5 min-w-5 place-items-center rounded-full bg-brand px-[5px] text-xs font-bold text-white;
+  }
+
+  app-home-page .hero {
+    @apply grid grid-cols-[1fr_0.9fr] items-center gap-[60px] overflow-hidden bg-sage px-[7%] py-14;
+  }
+
+  app-home-page .hero-content {
+    @apply max-w-[520px];
+  }
+
+  app-home-page .hero h1 {
+    @apply m-0 text-[clamp(36px,4.6vw,60px)] leading-[1.08] font-semibold tracking-[-2.4px];
+  }
+
+  app-home-page .hero-description {
+    @apply mt-5 mb-7 max-w-[400px] text-base leading-[1.7] text-muted;
+  }
+
+  app-home-page .primary-button {
+    @apply inline-flex min-h-12 items-center justify-center rounded-md border-0 bg-brand px-6 text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-brand-hover;
+  }
+
+  app-home-page .primary-button.full {
+    @apply w-full;
+  }
+
+  app-home-page .hero-image-frame {
+    @apply h-[380px] w-full max-w-[460px] justify-self-end overflow-hidden rounded-t-[180px] rounded-b-lg bg-[#e5e7df];
+  }
+
+  app-home-page .hero-image-frame img {
+    @apply block size-full object-cover;
+  }
+
+  app-home-page .benefits {
+    @apply grid grid-cols-3 gap-6 border-b border-line px-[7%] py-6;
+  }
+
+  app-home-page .benefits > div {
+    @apply text-center;
+  }
+
+  app-home-page .benefits strong {
+    @apply text-sm;
+  }
+
+  app-home-page .benefits p {
+    @apply mt-1 mb-0 text-[13px] text-muted;
+  }
+
+  app-home-page .products-section {
+    @apply scroll-mt-[70px] px-[7%] pt-[72px] pb-24;
+  }
+
+  app-home-page .section-heading {
+    @apply flex items-baseline justify-between gap-4;
+  }
+
+  app-home-page .section-heading h2 {
+    @apply m-0 text-[clamp(28px,3.4vw,40px)] font-semibold tracking-[-1.4px];
+  }
+
+  app-home-page .product-count {
+    @apply m-0 text-sm text-muted;
+  }
+
+  app-home-page .toolbar {
+    @apply mt-6 mb-2 flex items-center justify-between gap-4;
+  }
+
+  app-home-page .category-list {
+    @apply flex gap-2 overflow-x-auto px-0.5 py-1;
+    scrollbar-width: none;
+  }
+
+  app-home-page .category-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  app-home-page .category-button {
+    @apply min-h-10 flex-none rounded-full border border-line bg-white px-[18px] text-sm text-muted transition-all duration-150 hover:border-brand hover:text-brand;
+  }
+
+  app-home-page .category-button.active {
+    @apply border-brand bg-brand text-white;
+  }
+
+  app-home-page .sort {
+    @apply flex flex-none items-center gap-2 text-sm text-muted;
+  }
+
+  app-home-page .sort select {
+    @apply h-10 rounded-lg border border-line bg-white px-[10px];
+  }
+
+  app-home-page .clear-filters {
+    @apply mt-2 border-0 bg-transparent py-1 text-sm text-brand underline underline-offset-[3px];
+  }
+
+  app-home-page .product-grid {
+    @apply mt-7 grid grid-cols-3 gap-x-6 gap-y-10;
+  }
+
+  app-home-page .product-card {
+    @apply flex min-w-0 flex-col;
+  }
+
+  app-home-page .product-image {
+    @apply relative aspect-[400/460] overflow-hidden rounded-lg bg-[#f1f2ec];
+  }
+
+  app-home-page .product-image img {
+    @apply block size-full object-cover transition-transform duration-300 ease-in-out;
+  }
+
+  app-home-page .product-card:hover .product-image img {
+    @apply scale-[1.04];
+  }
+
+  app-home-page .product-badge {
+    @apply absolute top-3 left-3 rounded bg-white px-[10px] py-[5px] text-xs font-bold text-brand;
+  }
+
+  app-home-page .product-info {
+    @apply flex flex-1 flex-col pt-[14px];
+  }
+
+  app-home-page .product-meta {
+    @apply flex justify-between gap-2 text-[13px];
+  }
+
+  app-home-page .product-category,
+  app-home-page .rating {
+    @apply text-muted;
+  }
+
+  app-home-page .rating span {
+    @apply text-gold;
+  }
+
+  app-home-page .product-info h3 {
+    @apply mt-1.5 mb-0 text-[17px] font-semibold tracking-[-0.2px];
+  }
+
+  app-home-page .product-description {
+    @apply mt-1.5 mb-4 overflow-hidden text-sm leading-[1.55] text-muted;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  app-home-page .product-bottom {
+    @apply mt-auto flex items-center justify-between gap-[10px];
+  }
+
+  app-home-page .product-bottom strong {
+    @apply text-base;
+  }
+
+  app-home-page .add-button {
+    @apply min-h-10 rounded-md border border-brand bg-white px-4 text-sm font-semibold text-brand transition-all duration-150 hover:bg-brand hover:text-white;
+  }
+
+  app-home-page .empty-state {
+    @apply col-span-full rounded-lg border border-dashed border-line px-5 py-14 text-center;
+  }
+
+  app-home-page .empty-state h3 {
+    @apply mt-0 mb-2;
+  }
+
+  app-home-page .empty-state p {
+    @apply mt-0 mb-4 text-muted;
+  }
+
+  app-home-page .reset-button {
+    @apply rounded-md border-0 bg-brand px-[18px] py-[11px] text-white;
+  }
+
+  app-home-page .site-footer {
+    @apply flex flex-wrap items-center justify-between gap-4 border-t border-line px-[7%] py-8;
+  }
+
+  app-home-page .footer-brand {
+    @apply text-base;
+  }
+
+  app-home-page .site-footer p,
+  app-home-page .site-footer > span {
+    @apply m-0 text-[13px] text-muted;
+  }
+
+  app-home-page .overlay {
+    @apply invisible fixed inset-0 z-40 bg-black/45 opacity-0 transition-[opacity,visibility] duration-200;
+  }
+
+  app-home-page .overlay.open {
+    @apply visible opacity-100;
+    transition-delay: 0s;
+  }
+
+  app-home-page .drawer {
+    @apply invisible fixed top-0 right-0 bottom-0 z-50 flex w-[min(420px,100vw)] translate-x-full flex-col bg-white shadow-[-12px_0_40px_rgb(0_0_0_/_12%)] transition-[transform,visibility] duration-[260ms] ease-in-out;
+  }
+
+  app-home-page .drawer.open {
+    @apply visible translate-x-0;
+    transition-delay: 0s;
+  }
+
+  app-home-page .drawer-head {
+    @apply flex items-center justify-between border-b border-line px-6 py-5;
+  }
+
+  app-home-page .drawer-head h2 {
+    @apply m-0 text-lg;
+  }
+
+  app-home-page .icon-button {
+    @apply size-10 rounded-full border-0 bg-sage text-base;
+  }
+
+  app-home-page .cart-lines {
+    @apply m-0 flex-1 list-none overflow-y-auto px-6 py-2;
+  }
+
+  app-home-page .cart-line {
+    @apply grid grid-cols-[64px_1fr_auto] items-start gap-[14px] border-b border-line py-4;
+  }
+
+  app-home-page .cart-line img {
+    @apply h-[74px] w-16 rounded-md bg-[#f1f2ec] object-cover;
+  }
+
+  app-home-page .cart-line-info {
+    @apply flex flex-col gap-1 text-sm;
+  }
+
+  app-home-page .cart-line-info span {
+    @apply text-muted;
+  }
+
+  app-home-page .qty {
+    @apply mt-1.5 inline-flex w-fit items-center rounded-md border border-line;
+  }
+
+  app-home-page .qty button {
+    @apply size-9 border-0 bg-transparent text-lg;
+  }
+
+  app-home-page .qty span {
+    @apply min-w-7 text-center text-ink;
+  }
+
+  app-home-page .link-button {
+    @apply border-0 bg-transparent text-[13px] text-muted underline underline-offset-[3px] hover:text-brand;
+  }
+
+  app-home-page .drawer-foot {
+    @apply border-t border-line px-6 pt-5 pb-6;
+  }
+
+  app-home-page .subtotal {
+    @apply flex justify-between text-base;
+  }
+
+  app-home-page .drawer-foot p {
+    @apply mt-1.5 mb-4 text-[13px] text-muted;
+  }
+
+  app-home-page .drawer-empty {
+    @apply flex flex-1 flex-col items-center justify-center gap-1.5 px-6 py-6 text-center;
+  }
+
+  app-home-page .drawer-empty h3 {
+    @apply m-0;
+  }
+
+  app-home-page .drawer-empty p {
+    @apply mt-0 mb-[14px] text-sm text-muted;
+  }
+
+  app-home-page .toast {
+    @apply fixed bottom-6 left-1/2 z-[60] flex max-w-[calc(100vw-32px)] -translate-x-1/2 items-center gap-4 rounded-lg bg-ink px-4 py-3 pl-5 text-sm text-white shadow-[0_10px_30px_rgb(0_0_0_/_25%)] animate-[toast-in_200ms_ease];
+  }
+
+  app-home-page .toast button {
+    @apply whitespace-nowrap border-0 bg-transparent font-semibold text-[#cfe3c8] underline underline-offset-[3px];
+  }
+
+  app-home-page .visually-hidden {
+    @apply absolute size-px overflow-hidden whitespace-nowrap;
+    clip-path: inset(50%);
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+}
+
+@media (min-width: 1500px) {
+  app-home-page .product-grid {
+    @apply grid-cols-4;
+  }
+}
+
+@media (max-width: 1100px) {
+  app-home-page .site-header {
+    @apply gap-[14px] px-[4%];
+  }
+
+  app-home-page .main-nav {
+    @apply gap-4;
+  }
+
+  app-home-page .header-search {
+    @apply w-[190px];
+  }
+
+  app-home-page .hero,
+  app-home-page .products-section {
+    @apply px-[5%];
+  }
+
+  app-home-page .hero {
+    @apply gap-8;
+  }
+}
+
+@media (max-width: 760px) {
+  app-home-page .site-header {
+    @apply flex-wrap px-[5%] py-3;
+  }
+
+  app-home-page .main-nav {
+    @apply order-3 w-full justify-center gap-6 border-t border-line pt-1;
+  }
+
+  app-home-page .header-actions {
+    @apply ml-auto;
+  }
+
+  app-home-page .header-search {
+    @apply w-[min(46vw,220px)];
+  }
+
+  app-home-page .hero {
+    @apply grid-cols-1 px-[6%] pt-10 pb-12;
+  }
+
+  app-home-page .hero-image-frame {
+    @apply h-[300px] justify-self-center;
+  }
+
+  app-home-page .benefits {
+    @apply grid-cols-1 gap-[14px] px-[6%];
+  }
+
+  app-home-page .benefits > div {
+    @apply text-left;
+  }
+
+  app-home-page .products-section {
+    @apply px-[5%] pt-12 pb-16;
+  }
+
+  app-home-page .toolbar {
+    @apply flex-col items-stretch;
+  }
+
+  app-home-page .sort {
+    @apply justify-between;
+  }
+
+  app-home-page .sort select {
+    @apply max-w-[220px] flex-1;
+  }
+
+  app-home-page .category-list {
+    @apply -mx-[5%] px-[5%];
+  }
+
+  app-home-page .product-grid {
+    @apply grid-cols-2 gap-x-3 gap-y-7;
+  }
+
+  app-home-page .product-bottom {
+    @apply flex-col items-stretch;
+  }
+
+  app-home-page .add-button {
+    @apply w-full;
+  }
+
+  app-home-page .site-footer {
+    @apply flex-col items-start;
+  }
+}
+
+@media (max-width: 400px) {
+  app-home-page .header-search {
+    @apply w-[140px];
+  }
+
+  app-home-page .product-grid {
+    @apply grid-cols-1;
+  }
+
+  app-home-page .product-bottom {
+    @apply flex-row items-center;
+  }
+
+  app-home-page .add-button {
+    @apply w-auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  app-home-page *,
+  app-home-page *::before,
+  app-home-page *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -14,12 +14,6 @@ const CART_KEY = 'peak-store-cart';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.html',
-  styleUrls: [
-    './home-page.css',
-    './home-page-products.css',
-    './home-page-cart.css',
-    './home-page-responsive.css',
-  ],
 })
 export class HomePage {
   private readonly productService = inject(ProductService);
