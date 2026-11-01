@@ -32,7 +32,7 @@ Application code lives under `src/app` and is organized by responsibility:
 
 - `core/` contains app-wide authentication, guards, interceptors, services, and configuration.
 - `shared/` contains reusable components, directives, pipes, and utilities.
-- `features/` contains domain areas; the storefront is in `home/`, with product types and data in `products/`.
+- `features/` contains domain areas. Product-specific models, data access, and UI belong inside `features/products/`; `home/` contains the storefront landing page.
 - `layout/` contains the main and admin layout shells.
 - `app.config.ts` and `app.routes.ts` configure application providers and routes.
 

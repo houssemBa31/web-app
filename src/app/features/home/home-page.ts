@@ -1,6 +1,6 @@
-import { Component, HostListener, computed, effect, signal } from '@angular/core';
-import { PRODUCTS } from '../products/products.data';
-import type { Product } from '../products/product.model';
+import { Component, HostListener, computed, effect, inject, signal } from '@angular/core';
+import { ProductService } from '../products/data-access/product.service';
+import type { Product } from '../products/models/product.model';
 
 interface CartLine {
   product: Product;
@@ -22,8 +22,12 @@ const CART_KEY = 'peak-store-cart';
   ],
 })
 export class HomePage {
-  readonly products: Product[] = PRODUCTS;
-  readonly categories: string[] = ['All', ...new Set(PRODUCTS.map((product) => product.category))];
+  private readonly productService = inject(ProductService);
+  readonly products: Product[] = this.productService.getAll();
+  readonly categories: string[] = [
+    'All',
+    ...new Set(this.products.map((product) => product.category)),
+  ];
 
   // --- Filtres ---
   readonly searchQuery = signal('');

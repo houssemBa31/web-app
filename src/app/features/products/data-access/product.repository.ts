@@ -1,6 +1,7 @@
-import type { Product } from './product.model';
+import { Injectable } from '@angular/core';
+import type { Product } from '../models/product.model';
 
-export const PRODUCTS: Product[] = [
+const PRODUCTS: Product[] = [
   {
     id: 1,
     name: 'Classic Sneakers',
@@ -68,3 +69,10 @@ export const PRODUCTS: Product[] = [
     isNew: false,
   },
 ];
+
+@Injectable({ providedIn: 'root' })
+export class ProductRepository {
+  getAll(): Product[] {
+    return PRODUCTS;
+  }
+}
