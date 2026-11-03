@@ -1,9 +1,9 @@
 <a class="skip-link" href="#products">Skip to products</a>
 
 <header class="site-header">
-  <a class="brand" href="#home" aria-label="Peak Store home">
-    <span class="brand-mark">P</span>
-    <span>PEAK<span class="brand-light">STORE</span></span>
+  <a class="brand" href="#home" aria-label="HOUSS Store home">
+    <span class="brand-mark">H</span>
+    <span>HOUSS<span class="brand-light">STORE</span></span>
   </a>
 
   <nav class="main-nav" aria-label="Main navigation">
@@ -12,6 +12,14 @@
     <button type="button" class="nav-link" [class.active]="onlyNew()" (click)="showNewArrivals()">
       New arrivals
     </button>
+    <button type="button" class="nav-link" [class.active]="onlyNew()" (click)="showNewArrivals()">
+      categories
+    </button>
+    <button type="button" class="nav-link" [class.active]="onlyNew()" (click)="showNewArrivals()">
+      Promotions
+    </button>
+    <button type="button" class="nav-link" [class.active]="cartOpen()" (click)="cartOpen.set(true)">
+     About </button>
   </nav>
 
   <div class="header-actions">
@@ -30,6 +38,7 @@
     </label>
 
     <button class="cart-button" type="button" (click)="cartOpen.set(true)"
+
             [attr.aria-label]="'Open cart, ' + cartCount() + ' items'">
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
         <path d="M5 8h14l-1 12H6L5 8Zm4 0V7a3 3 0 0 1 6 0v1" fill="none"
@@ -62,16 +71,9 @@
     </div>
   </section>
 
-  <!-- Adapte ces 3 promesses à ta vraie offre -->
-  <section class="benefits" aria-label="Store benefits">
-    <div><strong>Cash on delivery</strong><p>Pay when your order arrives</p></div>
-    <div><strong>Delivery to your wilaya</strong><p>Tracked from shop to door</p></div>
-    <div><strong>Easy returns</strong><p>Change your mind within 7 days</p></div>
-  </section>
-
   <section id="products" class="products-section">
     <div class="section-heading">
-      <h2>Shop</h2>
+      <h2>All Products</h2>
       <p class="product-count" role="status" aria-live="polite">
         {{ filteredProducts().length }} products
       </p>
@@ -150,14 +152,18 @@
     </div>
   </section>
 </main>
-
+<section class="benefits" aria-label="Store benefits">
+    <div><strong>Cash on delivery</strong><p>Pay when your order arrives</p></div>
+    <div><strong>Delivery to your wilaya</strong><p>Tracked from shop to door</p></div>
+    <div><strong>Easy returns</strong><p>Change your mind within 7 days</p></div>
+  </section>
 <footer class="site-footer">
   <a class="brand footer-brand" href="#home">
-    <span class="brand-mark">P</span>
-    <span>PEAK<span class="brand-light">STORE</span></span>
+    <span class="brand-mark">H</span>
+    <span>HOUSS<span class="brand-light">STORE</span></span>
   </a>
   <p>Thoughtfully selected. Made for everyday life.</p>
-  <span>© 2026 Peak Store</span>
+  <span>© 2026 Houss Store</span>
 </footer>
 
 <!-- Panier -->

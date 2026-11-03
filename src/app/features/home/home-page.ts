@@ -1,6 +1,7 @@
 import { Component, HostListener, computed, effect, inject, signal } from '@angular/core';
 import { ProductService } from '../products/data-access/product.service';
 import type { Product } from '../products/models/product.model';
+import { NgClass } from '../../../../node_modules/@angular/common/types/_common_module-chunk';
 
 interface CartLine {
   product: Product;
@@ -9,11 +10,12 @@ interface CartLine {
 
 type SortKey = 'featured' | 'price-asc' | 'price-desc' | 'rating';
 
-const CART_KEY = 'peak-store-cart';
+const CART_KEY = 'houss-store-cart';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.html',
+  imports: [NgClass],
 })
 export class HomePage {
   private readonly productService = inject(ProductService);
